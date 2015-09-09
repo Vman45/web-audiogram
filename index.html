@@ -35,24 +35,33 @@
                 <img src="img/audiogramme.png"
                   style="max-width:100%;"> </div>
             <h3>Comment tracer un audiogramme?</h3>
-            <p>Grâce à cette page vous allez pouvoir tracer votre audiogramme. Pour cela il suffit de déplacer la souris sur l'écran afin de modifier l'amplitude et la fréquence du son émis. </p>
+            <p>Grâce à cette page vous allez pouvoir tracer votre audiogramme. Pour cela il suffit de sélectionner la fréquence du son souhaité et d'ajuster le volume à l'aide des glisseurs ci-dessous. </p>
             <p>
-                <strong>Les valeurs de fréquence et de volume sont reportées dans le tableau ci-dessous:</strong>
+                <strong>Les valeurs de fréquence et de volume sont reportées sur la droite du tableau ci-dessous:</strong>
             </p>
             <ul class="list-group">
                 <li class="list-group-item">
                     <span id="freq"
-                      class="label label-default label-pill pull-right">14</span>Fréquence </li>
+                      class="label label-default label-pill pull-right">440</span>Fréquence
+                    <input name="freq"
+                      id="freq"
+                      type="range"
+                      min="0"
+                      max="20000"
+                      step="10"
+                      value="440"
+                      autocomplete=off> </li>
                 <li class="list-group-item">
                     <span id="ampl"
-                      class="label label-default label-pill pull-right">2</span> Volume
+                      class="label label-default label-pill pull-right">50</span> Volume
                     <input name="flevel"
                       id="volume"
                       type="range"
                       min="0"
                       max="100"
-                      step="0.1"
-                      value="0"> </li>
+                      step="1"
+                      value="50"
+                      autocomplete=off> </li>
             </ul>
             <p>Votre oreille est plus ou moins sensible aux sons en fonction de leur fréquence. Il existe un volume minimal à partir duquel vous êtes capable de percevoir le son. </p>
             <p> Afin de réaliser
