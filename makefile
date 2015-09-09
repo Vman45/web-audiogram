@@ -9,7 +9,7 @@ help:
 
 export:
 
-	mkdir -p output;cp -r index.html img output/
+	mkdir -p output;cp -r index.html img js css output/
 
 publish:
 	git push origin master
