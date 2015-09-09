@@ -10,14 +10,10 @@ window.onload = function() {
   oscillator.connect(gainNode);
   gainNode.connect(audioCtx.destination);
 
-
-  var WIDTH = window.innerWidth;
-  var HEIGHT = window.innerHeight;
-
   var maxFreq = 20000;
   var maxVol = 1;
 
-  var initialFreq = 3000;
+  var initialFreq = 440;
   var initialVol = 0.5;
 
   // set options for the oscillator
@@ -28,30 +24,22 @@ window.onload = function() {
 
   gainNode.gain.value = initialVol;
 
-  // Mouse pointer coordinates
+  // Get new values from input ranges
+  // then set new gain and pitch values
 
-  var CurX;
-  var CurY;
-
-  // Get new mouse pointer coordinates when mouse is moved
-  // then set new gain and putch values
-
-  document.onmousemove = updatePage;
+  $("input").on("input", updatePage);
 
   function updatePage(e) {
-    CurX = (window.Event) ? e.pageX : event.clientX + (document.documentElement.scrollLeft ? document.documentElement.scrollLeft : document.body.scrollLeft);
-    CurY = (window.Event) ? e.pageY : event.clientY + (document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop);
-
-    var freq = Math.floor((CurX / WIDTH) * maxFreq);
+    // set freq from input
+    var freq = $("input#freq").val();
     oscillator.frequency.value = freq;
-    //var ampl = (CurY / HEIGHT) * maxVol;
-    var ampl = $( "input#volume").val() / 100 ;
-    console.log(ampl);
+
+    // set amplitude from input
+    var ampl = $("input#volume").val() / 100;
     gainNode.gain.value = ampl;
 
     //console.log(CurX, CurY, WIDTH, HEIGHT);
     $("span#freq").text(freq);
-    $("span#ampl").text(Math.floor(1000 * ampl) / 10 + "%");
-
+    $("span#ampl").text(Math.floor(100 * ampl));
   }
 };

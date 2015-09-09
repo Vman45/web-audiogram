@@ -2,3 +2,9 @@ input {
   width:100%;
   padding: 1rem 0;
 }
+#freq::after {
+    content: " Hz";
+}
+#ampl::after {
+    content: " %";
+}
