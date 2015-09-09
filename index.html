@@ -2,104 +2,62 @@
 <html lang="fr">
 
     <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport"
+          content="width=device-width, initial-scale=1">
         <meta charset="utf-8">
         <title>Tracer son audiogramme</title>
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-GHW2S7IZAQe8+YkyL99LyDj1zdWXSPOG+JZafCtKiSc= sha512-vxM32w6T7zJ83xOQ6FT4CEFnlasqmkcB0+ojgbI0N6ZtSxYvHmT7sX2icN07TqEqr5wdKwoLkmB8sAsGAjCJHg==" crossorigin="anonymous">
-        <script src="https://code.jquery.com/jquery-2.1.4.min.js" </script>
-            < script src = "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha/js/bootstrap.min.js"
-            integrity = "sha256-+h0g0j7qusP72OZaLPCSZ5wjZLnoUUicoxbvrl14WxM= sha512-0z9zJIjxQaDVzlysxlaqkZ8L9jh8jZ2d54F3Dn36Y0a8C6eI/RFOME/tLCFJ42hfOxdclfa29lPSNCmX5ekxnw=="
-            crossorigin = "anonymous" >
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha256-GHW2S7IZAQe8+YkyL99LyDj1zdWXSPOG+JZafCtKiSc= sha512-vxM32w6T7zJ83xOQ6FT4CEFnlasqmkcB0+ojgbI0N6ZtSxYvHmT7sX2icN07TqEqr5wdKwoLkmB8sAsGAjCJHg=="
+          crossorigin="anonymous">
+        <link rel="stylesheet"
+          href="css/index.css">
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js">
         </script>
-
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha/js/bootstrap.min.js"
+          integrity="sha256-+h0g0j7qusP72OZaLPCSZ5wjZLnoUUicoxbvrl14WxM= sha512-0z9zJIjxQaDVzlysxlaqkZ8L9jh8jZ2d54F3Dn36Y0a8C6eI/RFOME/tLCFJ42hfOxdclfa29lPSNCmX5ekxnw=="
+          crossorigin="anonymous">
+        </script>
+        <script src="js/index.js">
+        </script>
     </head>
 
     <body>
-        <nav class="navbar navbar-light bg-faded" style="background-color: #e3f2fd;">
-            <div class="container">
-                <a class="navbar-brand" href="#">Tracer son audiogramme</a>
-            </div>
+        <nav class="navbar navbar-light bg-faded"
+          style="background-color: #e3f2fd;">
+            <div class="container"> <a class="navbar-brand"
+                  href="#">Tracer son audiogramme</a> </div>
         </nav>
         <div class="container">
-
-
-
             <h3>Qu'est ce qu'un audiogramme?</h3>
             <p>Le terme audiogramme désigne un graphique, utilisé en audiométrie tonale, qui permet de visualiser la capacité auditive d'un sujet.</p>
             <div style="text-align:center;">
-
-                <img src="img/audiogramme.png" style="max-width:100%;">
-            </div>
+                <img src="img/audiogramme.png"
+                  style="max-width:100%;"> </div>
             <h3>Comment tracer un audiogramme?</h3>
-            <p>Grâce à cette page vous allez pouvoir tracer votre audiogramme. Pour cela il suffit de déplacer la souris sur l'écran afin de modifier l'amplitude et la fréquence du son émis.
+            <p>Grâce à cette page vous allez pouvoir tracer votre audiogramme. Pour cela il suffit de déplacer la souris sur l'écran afin de modifier l'amplitude et la fréquence du son émis. </p>
+            <p>
+                <strong>Les valeurs de fréquence et de volume sont reportées dans le tableau ci-dessous:</strong>
             </p>
-            <p><strong>Les valeurs de fréquence et de volume sont reportées dans le tableau ci-dessous:</strong></p>
             <ul class="list-group">
                 <li class="list-group-item">
-                    <span id="freq" class="label label-default label-pill pull-right">14</span>Fréquence
-                </li>
+                    <span id="freq"
+                      class="label label-default label-pill pull-right">14</span>Fréquence </li>
                 <li class="list-group-item">
-                    <span id="ampl" class="label label-default label-pill pull-right">2</span> Volume </li>
-
+                    <span id="ampl"
+                      class="label label-default label-pill pull-right">2</span> Volume
+                    <input name="flevel"
+                      id="volume"
+                      type="range"
+                      min="0"
+                      max="100"
+                      step="0.1"
+                      value="0"> </li>
             </ul>
-            <p>Votre oreille est plus ou moins sensible aux sons en fonction de leur fréquence. Il existe un volume minimal à partir duquel vous êtes capable de percevoir le son.
-            </p>
-            <p> Afin de réaliser <strong>votre audiogramme</strong> il suffit de reporter le volume minimal d'audition en fonction de la fréquence sur un graphique.</p>
+            <p>Votre oreille est plus ou moins sensible aux sons en fonction de leur fréquence. Il existe un volume minimal à partir duquel vous êtes capable de percevoir le son. </p>
+            <p> Afin de réaliser
+                <strong>votre audiogramme</strong> il suffit de reporter le volume minimal d'audition en fonction de la fréquence sur un graphique.</p>
         </div>
-
-        <script>
-            // Adapted from MDN tutorial: https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Using_Web_Audio_API
-
-            // globals
-            var audioCtx = new(window.AudioContext || window.webkitAudioContext)();
-            oscillator = audioCtx.createOscillator();
-            var gainNode = audioCtx.createGain();
-            oscillator.connect(gainNode);
-            gainNode.connect(audioCtx.destination);
-
-
-            var WIDTH = window.innerWidth;
-            var HEIGHT = window.innerHeight;
-
-            var maxFreq = 20000;
-            var maxVol = 1;
-
-            var initialFreq = 3000;
-            var initialVol = 0.5;
-
-            // set options for the oscillator
-
-            oscillator.type = 'sine'; // sine wave — other values are 'square', 'sawtooth', 'triangle' and 'custom'
-            oscillator.frequency.value = initialFreq; // value in hertz
-            oscillator.start();
-
-            gainNode.gain.value = initialVol;
-
-            // Mouse pointer coordinates
-
-            var CurX;
-            var CurY;
-
-            // Get new mouse pointer coordinates when mouse is moved
-            // then set new gain and putch values
-
-            document.onmousemove = updatePage;
-
-            function updatePage(e) {
-                CurX = (window.Event) ? e.pageX : event.clientX + (document.documentElement.scrollLeft ? document.documentElement.scrollLeft : document.body.scrollLeft);
-                CurY = (window.Event) ? e.pageY : event.clientY + (document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop);
-
-                var freq = Math.floor((CurX / WIDTH) * maxFreq);
-                oscillator.frequency.value = freq;
-                var ampl = (CurY / HEIGHT) * maxVol;
-                gainNode.gain.value = ampl
-
-                //console.log(CurX, CurY, WIDTH, HEIGHT);
-                $("span#freq").text(freq);
-                $("span#ampl").text(Math.floor(1000 * ampl) / 10 + "%");
-
-            }
-        </script>
     </body>
 
 </html>
